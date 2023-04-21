@@ -1,0 +1,8 @@
+name: Level
+version: '1.0.0'
+main: io.leeple.level.Main
+api-version: 1.13
+
+commands:
+  Level:
+    aliases: "레벨"
