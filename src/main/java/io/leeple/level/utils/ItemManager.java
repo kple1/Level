@@ -16,10 +16,9 @@ import java.util.UUID;
 
 public class ItemManager {
 
-    YamlConfiguration config = PlayerDataUtil.GetConfig();
     private Player player;
 
-    private static ItemStack Result1(Material type, int amount, String displayName, String... lore) {
+    private static ItemStack result_LongType(Material type, int amount, String displayName, String... lore) {
         ItemStack stack = new ItemStack(type, amount);
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(displayName);
@@ -28,17 +27,17 @@ public class ItemManager {
         return stack;
     }
 
-    private static ItemStack Result2(Material type, int amount) {
+    private static ItemStack result_ShortType(Material type, int amount) {
         ItemStack stack = new ItemStack(type, amount);
         return stack;
     }
 
-    public static final ItemStack ItemList = Result2(Material.CHEST_MINECART, 1);
-    public static final ItemStack NextPage = Result2(Material.OAK_BUTTON, 1);
-    public static final ItemStack RewardDesigned = Result2(Material.BLACK_STAINED_GLASS_PANE, 1);
-    public static final ItemStack NameTag = Result2(Material.NAME_TAG, 1);
-    public static final ItemStack Seal = Result2(Material.STRING, 1);
-    public static final ItemStack Reward = Result2(Material.ENCHANTING_TABLE, 1);
-    public static final ItemStack Icon = Result2(Material.GLASS, 1);
-    public static final ItemStack LimitLevel = Result2(Material.DIAMOND, 1);
+    public static final ItemStack ItemList = result_ShortType(Material.CHEST_MINECART, 1);
+    public static final ItemStack NextPage = result_ShortType(Material.OAK_BUTTON, 1);
+    public static final ItemStack RewardDesigned = result_ShortType(Material.BLACK_STAINED_GLASS_PANE, 1);
+    public static final ItemStack NameTag = result_ShortType(Material.NAME_TAG, 1);
+    public static final ItemStack Seal = result_ShortType(Material.STRING, 1);
+    public static final ItemStack Reward = result_ShortType(Material.ENCHANTING_TABLE, 1);
+    public static final ItemStack Icon = result_ShortType(Material.GLASS, 1);
+    public static final ItemStack LimitLevel = result_ShortType(Material.DIAMOND, 1);
 }

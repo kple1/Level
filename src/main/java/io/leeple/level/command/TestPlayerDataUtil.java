@@ -17,6 +17,7 @@ public class TestPlayerDataUtil implements CommandExecutor {
         if (sender instanceof Player player) {
             if (args.length > 0) {
                 function(player);
+                return true;
             }
         }
         return false;

@@ -43,6 +43,7 @@ public class LevelCommand implements CommandExecutor {
                         LI.onCommand(sender, command, label, args);
                     }
 
+                    /** PlayerDataUtil Test Command */
                     case "Test" -> {
                         TestPlayerDataUtil TPD = new TestPlayerDataUtil();
                         TPD.onCommand(sender, command, label, args);
@@ -53,7 +54,7 @@ public class LevelCommand implements CommandExecutor {
                     }
                 }
             } else {
-                player.sendMessage("사용법: /레벨 (닉네임) (차감, 추가, 초기화, 보상, 정보) (갯수)");
+                player.sendMessage("사용법: /Level <var> <result>");
             }
         }
         return false;
