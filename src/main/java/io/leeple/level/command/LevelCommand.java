@@ -43,6 +43,11 @@ public class LevelCommand implements CommandExecutor {
                         LI.onCommand(sender, command, label, args);
                     }
 
+                    case "Test" -> {
+                        TestPlayerDataUtil TPD = new TestPlayerDataUtil();
+                        TPD.onCommand(sender, command, label, args);
+                    }
+
                     default -> {
                         player.sendMessage("올바른 명령어를 입력하세요.");
                     }

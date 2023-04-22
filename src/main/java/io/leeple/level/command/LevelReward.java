@@ -21,6 +21,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.util.*;
@@ -83,7 +84,6 @@ public class LevelReward implements CommandExecutor {
 
     private Inventory inv;
     ItemStack userLevel;
-
 
     /** Inventory Open & Settings */
     public void Inventory(Player player) {
