@@ -14,8 +14,9 @@ import java.util.UUID;
 public class PlayerDataUtil {
 
     private static YamlConfiguration config;
+    private static File playerFile;
 
-    public YamlConfiguration Config(String[] args, CommandSender sender) {
+    public static YamlConfiguration Config(String[] args, CommandSender sender) {
         if (sender instanceof Player player) {
             if (args.length > 0) {
                 String playerName = args[0];
@@ -32,19 +33,18 @@ public class PlayerDataUtil {
                     targetUUID = offlinePlayer.getUniqueId();
                 }
 
-                File playerFile = new File(Main.getPlugin().getUuidFolder(), targetUUID.toString() + ".yml");
+                playerFile = new File(Main.getPlugin().getUuidFolder(), targetUUID.toString() + ".yml");
 
                 if (!playerFile.exists()) {
                     UUID uuid = player.getUniqueId();
                     Main.getPlugin().createPlayerDefaults(uuid);
                     config = YamlConfiguration.loadConfiguration(playerFile);
+                } else {
+                    config = YamlConfiguration.loadConfiguration(playerFile);
                 }
+                return config; //config 변수를 반환하도록 수정
             }
         }
         return null;
-    }
-
-    public static YamlConfiguration GetConfig() {
-        return config;
     }
 }

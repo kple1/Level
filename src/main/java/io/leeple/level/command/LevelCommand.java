@@ -1,7 +1,6 @@
 package io.leeple.level.command;
 
 import io.leeple.level.Main;
-import io.leeple.level.utils.ItemManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +13,6 @@ public class LevelCommand implements CommandExecutor {
         if (sender instanceof Player player) {
             if (args.length > 0) {
 
-                Main plugin = Main.getPlugin();
 
                 String arg = args[1];
                 switch (arg) {
@@ -41,6 +39,16 @@ public class LevelCommand implements CommandExecutor {
                     case "정보", "info" -> {
                         LevelInfo LI = new LevelInfo();
                         LI.onCommand(sender, command, label, args);
+                    }
+
+                    case "정보끄기", "Off", "off" -> {
+                        OffActionBar OAB = new OffActionBar();
+                        OAB.onCommand(sender, command, label, args);
+                    }
+
+                    case "정보켜기", "On", "on" -> {
+                        OnActionBar OnAB = new OnActionBar();
+                        OnAB.onCommand(sender, command, label, args);
                     }
 
                     /** PlayerDataUtil Test Command */

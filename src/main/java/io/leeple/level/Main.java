@@ -6,12 +6,7 @@ import io.leeple.level.event.ItemClickCancel;
 import io.leeple.level.event.RewardClick;
 import io.leeple.level.utils.ColorUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,7 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -80,7 +74,7 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
         playerConfig.addDefault("Level", "1");
         playerConfig.addDefault("EXP", "0/10");
         playerConfig.options().copyDefaults(true);
-        saveYamlConfiguration(playerConfig, playerFile);
+        saveYamlConfiguration(playerConfig, YamlConfiguration.loadConfiguration(playerFile));
     }
 
     public void updateActionBar(Player player, String message) {
@@ -118,9 +112,9 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
     }
 
     //저장
-    public void saveYamlConfiguration(YamlConfiguration config, File file) {
+    public void saveYamlConfiguration(YamlConfiguration config, YamlConfiguration file) {
         try {
-            config.save(file);
+            config.save(String.valueOf(file));
         } catch (IOException e) {
             e.printStackTrace();
         }
