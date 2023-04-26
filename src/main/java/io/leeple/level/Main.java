@@ -4,7 +4,6 @@ import io.leeple.level.command.LevelCommand;
 import io.leeple.level.command.LevelRewardManager;
 import io.leeple.level.event.GetLevelEXP;
 import io.leeple.level.event.ItemClickCancel;
-import io.leeple.level.event.RewardClick;
 import io.leeple.level.utils.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -32,7 +31,6 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
     public void Plugins() {
         Bukkit.getPluginManager().registerEvents(new ItemClickCancel(), this);
         Bukkit.getPluginManager().registerEvents(new GetLevelEXP(), this);
-        Bukkit.getPluginManager().registerEvents(new RewardClick(),this);
         Bukkit.getPluginManager().registerEvents(new LevelRewardManager(), this);
         Bukkit.getPluginManager().registerEvents(this, this);
     }

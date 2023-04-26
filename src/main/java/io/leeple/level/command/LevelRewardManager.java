@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +19,7 @@ import static io.leeple.level.Main.plugin;
 public class LevelRewardManager implements CommandExecutor, Listener {
 
     private Inventory inventory;
+    private Inventory Rinventory;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -30,6 +32,29 @@ public class LevelRewardManager implements CommandExecutor, Listener {
             }
         }
         return false;
+    }
+
+    @EventHandler
+    public void RightClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        for (int i = 0; i < 36; i++) {
+            if (event.getView().getTitle().equals("관리자설정")) {
+                if (event.getSlot() == i) {
+                    this.Rinventory = Bukkit.createInventory(null, 27, "설정");
+                    Rinventory.setItem(11, ItemManager.NameTag);
+                    Rinventory.setItem(13, ItemManager.Reward);
+                    Rinventory.setItem(15, ItemManager.LimitLevel);
+                    player.openInventory(Rinventory);
+                }
+            }
+        }
+        for (int i = 36; i < 54; i++) {
+            if (event.getView().getTitle().equals("관리자설정")) {
+                if (event.getSlot() == i) {
+                    event.setCancelled(true);
+                }
+            }
+        }
     }
 
     public void ManagerSettings(Player player) {

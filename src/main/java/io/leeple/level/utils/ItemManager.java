@@ -35,9 +35,7 @@ public class ItemManager {
     public static final ItemStack barrier = result_LongType(Material.BARRIER,1,(ColorUtils.chat("&c채울 수 없는 칸 입니다.")));
     public static final ItemStack NextPage = result_ShortType(Material.OAK_BUTTON, 1);
     public static final ItemStack RewardDesigned = result_ShortType(Material.BLACK_STAINED_GLASS_PANE, 1);
-    public static final ItemStack NameTag = result_ShortType(Material.NAME_TAG, 1);
-    public static final ItemStack Seal = result_ShortType(Material.STRING, 1);
-    public static final ItemStack Reward = result_ShortType(Material.ENCHANTING_TABLE, 1);
-    public static final ItemStack Icon = result_ShortType(Material.GLASS, 1);
-    public static final ItemStack LimitLevel = result_ShortType(Material.DIAMOND, 1);
+    public static final ItemStack NameTag = result_LongType(Material.NAME_TAG, 1, (ColorUtils.chat("&f[&7 보상이름 설정 &f]")));
+    public static final ItemStack Reward = result_LongType(Material.ENCHANTING_TABLE, 1, (ColorUtils.chat("&f[&7 보상 설정 &f]")));
+    public static final ItemStack LimitLevel = result_LongType(Material.DIAMOND, 1, (ColorUtils.chat("&f[&7 보상수령 &c레벨제한 &7설정 &f]")));
 }
