@@ -51,6 +51,11 @@ public class LevelCommand implements CommandExecutor {
                         OnAB.onCommand(sender, command, label, args);
                     }
 
+                    case "보상설정", "ps" -> {
+                        LevelRewardManager LRM = new LevelRewardManager();
+                        LRM.onCommand(sender, command, label, args);
+                    }
+
                     /** PlayerDataUtil Test Command */
                     case "Test" -> {
                         TestPlayerDataUtil TPD = new TestPlayerDataUtil();

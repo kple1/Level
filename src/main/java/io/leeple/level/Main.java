@@ -1,6 +1,7 @@
 package io.leeple.level;
 
 import io.leeple.level.command.LevelCommand;
+import io.leeple.level.command.LevelRewardManager;
 import io.leeple.level.event.GetLevelEXP;
 import io.leeple.level.event.ItemClickCancel;
 import io.leeple.level.event.RewardClick;
@@ -32,6 +33,7 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
         Bukkit.getPluginManager().registerEvents(new ItemClickCancel(), this);
         Bukkit.getPluginManager().registerEvents(new GetLevelEXP(), this);
         Bukkit.getPluginManager().registerEvents(new RewardClick(),this);
+        Bukkit.getPluginManager().registerEvents(new LevelRewardManager(), this);
         Bukkit.getPluginManager().registerEvents(this, this);
     }
 
@@ -90,26 +92,42 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
         // 일정 시간(여기에서는 0.1초) 후에 다시 ActionBar를 갱신합니다.
         task = getServer().getScheduler().runTaskLater(this, () -> {
             updateActionBar(player, message);
-        }, 10L); // 0.1초(100 ticks) 후에 실행합니다.
-
+        }, 10L); // 0.1초(100 ticks) 후에 실행합니다. */
         // 갱신 작업을 저장해둡니다.
         actionBarTasks.put(player.getUniqueId(), task);
     }
 
+    /** 파일과 config path 생성 */
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
         File playerFile = new File(uuidFolder, uuid.toString() + ".yml");
         if (!playerFile.exists()) {
-            createPlayerDefaults(uuid);
+            try {
+                playerFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
         YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playerFile);
+
+        playerConfig.addDefault("Level", "1");
+        playerConfig.addDefault("EXP", "0/10");
+        playerConfig.options().copyDefaults(true);
+
         String Level = playerConfig.getString("Level");
         String EXP = playerConfig.getString("EXP");
         String message = (ColorUtils.chat("[ &b" + player.getName() + "&f님의 레벨정보: " + "&aLevel&f: " + Level + " / " + "&aEXP&f: " + EXP + " ]"));
         updateActionBar(player, message);
+        try {
+            playerConfig.save(playerFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     //저장
     public void saveYamlConfiguration(YamlConfiguration config, YamlConfiguration file) {

@@ -24,7 +24,9 @@ public class LevelReward implements CommandExecutor {
     private Inventory inv;
     ItemStack userLevel;
 
-    /** Get function */
+    /**
+     * Get function
+     */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
@@ -38,6 +40,7 @@ public class LevelReward implements CommandExecutor {
                 String playername = player.getName();
                 userLevel = Result1(Material.EXPERIENCE_BOTTLE, 1, (ColorUtils.chat("&f[ " + playername + "님의 &k1 &a레벨 &f&k1&f 정보 ]")), ColorUtils.chat("&fLevel : &a" + Level + " &f/ &fEXP : &b" + EXP));
                 Inventory(player);
+                ItemReward();
                 ItemList();
             }
         }
@@ -54,7 +57,9 @@ public class LevelReward implements CommandExecutor {
         return stack;
     }
 
-    /** Inventory Open & Settings */
+    /**
+     * Inventory Open & Settings
+     */
     public void Inventory(Player player) {
         this.inv = Bukkit.createInventory(null, 54, "레벨보상");
         inv.setItem(46, ItemManager.NextPage);
@@ -63,14 +68,19 @@ public class LevelReward implements CommandExecutor {
         player.openInventory(inv);
     }
 
-    /** Inventory Item List */
+    public void ItemReward() {
+        for (int i = 0; i < 36; i++) {
+            ItemStack item = plugin.getConfig().getItemStack("reward." + i + ".item");
+            inv.setItem(i, item);
+        }
+    }
+
+    /**
+     * Item Designed
+     */
     public void ItemList() {
         ItemStack Designed = ItemManager.RewardDesigned;
-        ItemStack Item = ItemManager.ItemList;
         int i;
-        /** Item Reward */
-
-        /** Item Designed */
         for (i = 36; i < 45; i++) {
             inv.setItem(i, Designed);
         }
