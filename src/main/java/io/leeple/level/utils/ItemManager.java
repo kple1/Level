@@ -1,22 +1,12 @@
 package io.leeple.level.utils;
 
-import io.leeple.level.Main;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.UUID;
 
 public class ItemManager {
-
-    private Player player;
 
     private static ItemStack result_LongType(Material type, int amount, String displayName, String... lore) {
         ItemStack stack = new ItemStack(type, amount);
