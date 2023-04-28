@@ -46,9 +46,10 @@ public class LevelRewardManager implements CommandExecutor, Listener {
             if (event.getSlot() == 11) {
                 player.closeInventory();
                 player.sendMessage("아이템 이름을 채팅으로 입력해주세요:");
-
                 // 관리자설정에서의 슬롯번호를 가져오기
-                Bukkit.getPluginManager().registerEvents(new ChatListener(player, event.getSlot()), plugin);
+                if (event.getView().getTitle().equals("관리자설정")) {
+                    Bukkit.getPluginManager().registerEvents(new ChatListener(player, event.getSlot()), plugin);
+                }
             }
         }
     }
