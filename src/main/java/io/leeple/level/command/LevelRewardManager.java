@@ -1,15 +1,19 @@
 package io.leeple.level.command;
 
+import io.leeple.level.event.ChatListener;
 import io.leeple.level.utils.ItemManager;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +24,7 @@ public class LevelRewardManager implements CommandExecutor, Listener {
 
     private Inventory inventory;
     private Inventory Rinventory;
+    private String message;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -35,16 +40,40 @@ public class LevelRewardManager implements CommandExecutor, Listener {
     }
 
     @EventHandler
-    public void RightClick(InventoryClickEvent event) {
+    public void SettingsClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
+        if (event.getView().getTitle().equals("설정")) {
+            if (event.getSlot() == 11) {
+                player.closeInventory();
+                player.sendMessage("아이템 이름을 채팅으로 입력해주세요:");
+
+                // 관리자설정에서의 슬롯번호를 가져오기
+                Bukkit.getPluginManager().registerEvents(new ChatListener(player, event.getSlot()), plugin);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onChat(PlayerChatEvent event) {
+        message = event.getMessage();
+    }
+
+    /* 관리자설정 아이템을 클릭시 아이콘에 대한 설정창 오픈 */
+    @EventHandler
+    public void RightClick(InventoryClickEvent event) {
+
+        Player player = (Player) event.getWhoClicked();
+
         for (int i = 0; i < 36; i++) {
             if (event.getView().getTitle().equals("관리자설정")) {
                 if (event.getSlot() == i) {
-                    this.Rinventory = Bukkit.createInventory(null, 27, "설정");
-                    Rinventory.setItem(11, ItemManager.NameTag);
-                    Rinventory.setItem(13, ItemManager.Reward);
-                    Rinventory.setItem(15, ItemManager.LimitLevel);
-                    player.openInventory(Rinventory);
+                    if (ClickType.SHIFT_LEFT == event.getClick()) {
+                        this.Rinventory = Bukkit.createInventory(null, 27, "설정");
+                        Rinventory.setItem(11, ItemManager.NameTag);
+                        Rinventory.setItem(13, ItemManager.Reward);
+                        Rinventory.setItem(15, ItemManager.LimitLevel);
+                        player.openInventory(Rinventory);
+                    }
                 }
             }
         }
