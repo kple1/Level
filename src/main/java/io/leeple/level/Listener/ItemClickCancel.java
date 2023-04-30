@@ -1,4 +1,4 @@
-package io.leeple.level.event;
+package io.leeple.level.Listener;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;

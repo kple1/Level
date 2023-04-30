@@ -1,9 +1,8 @@
 package io.leeple.level.command;
 
-import io.leeple.level.event.ChatListener;
+import io.leeple.level.Listener.ChatListener;
 import io.leeple.level.utils.ItemManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

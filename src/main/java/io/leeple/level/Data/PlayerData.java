@@ -1,4 +1,4 @@
-package io.leeple.level.utils;
+package io.leeple.level.Data;
 
 import io.leeple.level.Main;
 import org.bukkit.Bukkit;
@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.util.UUID;
 
-public class PlayerDataUtil {
+public class PlayerData {
 
     public static YamlConfiguration config;
     public static File playerFile;
@@ -33,16 +33,15 @@ public class PlayerDataUtil {
                     targetUUID = offlinePlayer.getUniqueId();
                 }
 
-                playerFile = new File(Main.getPlugin().getUuidFolder(), "plugins/Level/UUIDs" + targetUUID.toString() + ".yml");
+                playerFile = new File(Main.getPlugin().getUuidFolder(), "plugins/Level/UUIDs/" + targetUUID.toString() + ".yml");
 
                 if (!playerFile.exists()) {
-                    UUID uuid = player.getUniqueId();
-                    Main.getPlugin().createPlayerDefaults(uuid, player);
+                    Main.getPlugin().createPlayerDefaults(player);
                     config = YamlConfiguration.loadConfiguration(playerFile);
                 } else {
                     config = YamlConfiguration.loadConfiguration(playerFile);
                 }
-                return config; //config 변수를 반환하도록 수정
+                return config;//config 변수를 반환하도록 수정
             }
         }
         return null;

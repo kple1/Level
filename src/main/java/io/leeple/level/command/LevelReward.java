@@ -2,7 +2,7 @@ package io.leeple.level.command;
 
 import io.leeple.level.utils.ColorUtils;
 import io.leeple.level.utils.ItemManager;
-import io.leeple.level.utils.PlayerDataUtil;
+import io.leeple.level.Data.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -32,7 +32,7 @@ public class LevelReward implements CommandExecutor {
         if (sender instanceof Player player) {
             if (args.length > 0) {
 
-                YamlConfiguration config = PlayerDataUtil.Config(args, sender);
+                YamlConfiguration config = PlayerData.Config(args, sender);
 
                 String Level = config.getString("Level");
                 String EXP = config.getString("EXP");

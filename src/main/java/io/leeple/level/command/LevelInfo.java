@@ -1,6 +1,6 @@
 package io.leeple.level.command;
 
-import io.leeple.level.utils.PlayerDataUtil;
+import io.leeple.level.Data.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +14,7 @@ public class LevelInfo implements CommandExecutor {
 
         if (sender instanceof Player player) {
             if (args.length > 0) {
-                YamlConfiguration config = PlayerDataUtil.Config(args, sender);
+                YamlConfiguration config = PlayerData.Config(args, sender);
 
                 String LEVEL = "[ &6" + player + "&f" + "님의 레벨정보 ]";
                 // 플레이어의 Level 정보를 알려줌

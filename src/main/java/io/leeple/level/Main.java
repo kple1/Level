@@ -1,17 +1,14 @@
 package io.leeple.level;
 
+import io.leeple.level.Listener.CreateFile;
 import io.leeple.level.command.LevelCommand;
 import io.leeple.level.command.LevelRewardManager;
-import io.leeple.level.event.GetLevelEXP;
-import io.leeple.level.event.ItemClickCancel;
-import io.leeple.level.utils.ColorUtils;
+import io.leeple.level.Listener.GetLevelEXP;
+import io.leeple.level.Listener.ItemClickCancel;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -21,10 +18,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static io.leeple.level.utils.PlayerDataUtil.config;
-import static io.leeple.level.utils.PlayerDataUtil.playerFile;
+import static io.leeple.level.Data.PlayerData.config;
+import static io.leeple.level.Data.PlayerData.playerFile;
 
-public final class Main extends JavaPlugin implements Listener, CommandExecutor {
+public final class Main extends JavaPlugin implements CommandExecutor {
 
     private final Map<UUID, BukkitTask> actionBarTasks = new HashMap<>();
     public static Main plugin;
@@ -35,7 +32,7 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
         Bukkit.getPluginManager().registerEvents(new ItemClickCancel(), this);
         Bukkit.getPluginManager().registerEvents(new GetLevelEXP(), this);
         Bukkit.getPluginManager().registerEvents(new LevelRewardManager(), this);
-        Bukkit.getPluginManager().registerEvents(this, this);
+        Bukkit.getPluginManager().registerEvents(new CreateFile(), this);
     }
 
     public void Config() {
@@ -53,10 +50,6 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
         Command();
         Config();
         Plugins();
-        uuidFolder = new File(getDataFolder(), "UUIDs");
-        if (!uuidFolder.exists()) {
-            uuidFolder.mkdirs();
-        }
     }
 
     @Override
@@ -71,8 +64,7 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
     }
 
     //플레이어의 uuid명으로 생성된 config에 레벨정보를 기본적으로 추가
-    public void createPlayerDefaults(UUID uuid, Player player) {
-        File playerFile = new File(uuidFolder, uuid.toString() + ".yml");
+    public void createPlayerDefaults(Player player) {
         YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playerFile);
         playerConfig.addDefault("Level", "1");
         playerConfig.addDefault("EXP", "0/10");
@@ -98,42 +90,11 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
         actionBarTasks.put(player.getUniqueId(), task);
     }
 
-    /** 파일과 config path 생성 */
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
-        File playerFile = new File(uuidFolder, uuid.toString() + ".yml");
-        if (!playerFile.exists()) {
-            try {
-                playerFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playerFile);
-
-        playerConfig.addDefault("Level", "1");
-        playerConfig.addDefault("EXP", "0/10");
-        playerConfig.options().copyDefaults(true);
-
-        String Level = playerConfig.getString("Level");
-        String EXP = playerConfig.getString("EXP");
-        String message = (ColorUtils.chat("[ &b" + player.getName() + "&f님의 레벨정보: " + "&aLevel&f: " + Level + " / " + "&aEXP&f: " + EXP + " ]"));
-        updateActionBar(player, message);
-        try {
-            playerConfig.save(playerFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     //저장
     public void saveYamlConfiguration(Player player) {
         try {
             config.save(playerFile);
+            player.sendMessage(("정보가 저장 되었습니다"));
         } catch (IOException e) {
             e.printStackTrace();
         }
