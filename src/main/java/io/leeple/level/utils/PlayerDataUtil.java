@@ -13,8 +13,8 @@ import java.util.UUID;
 
 public class PlayerDataUtil {
 
-    private static YamlConfiguration config;
-    private static File playerFile;
+    public static YamlConfiguration config;
+    public static File playerFile;
 
     public static YamlConfiguration Config(String[] args, CommandSender sender) {
         if (sender instanceof Player player) {
@@ -33,11 +33,11 @@ public class PlayerDataUtil {
                     targetUUID = offlinePlayer.getUniqueId();
                 }
 
-                playerFile = new File(Main.getPlugin().getUuidFolder(), targetUUID.toString() + ".yml");
+                playerFile = new File(Main.getPlugin().getUuidFolder(), "plugins/Level/UUIDs" + targetUUID.toString() + ".yml");
 
                 if (!playerFile.exists()) {
                     UUID uuid = player.getUniqueId();
-                    Main.getPlugin().createPlayerDefaults(uuid);
+                    Main.getPlugin().createPlayerDefaults(uuid, player);
                     config = YamlConfiguration.loadConfiguration(playerFile);
                 } else {
                     config = YamlConfiguration.loadConfiguration(playerFile);

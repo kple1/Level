@@ -25,6 +25,7 @@ public class LevelRewardManager implements CommandExecutor, Listener {
     private Inventory inventory;
     private Inventory Rinventory;
     private String message;
+    private int previousSlot = -1;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -46,13 +47,11 @@ public class LevelRewardManager implements CommandExecutor, Listener {
             if (event.getSlot() == 11) {
                 player.closeInventory();
                 player.sendMessage("아이템 이름을 채팅으로 입력해주세요:");
-                // 관리자설정에서의 슬롯번호를 가져오기
-                if (event.getView().getTitle().equals("관리자설정")) {
-                    Bukkit.getPluginManager().registerEvents(new ChatListener(player, event.getSlot()), plugin);
-                }
+                Bukkit.getPluginManager().registerEvents(new ChatListener(player, event.getSlot()), plugin);
             }
         }
     }
+
 
     @EventHandler
     public void onChat(PlayerChatEvent event) {

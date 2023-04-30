@@ -11,7 +11,7 @@ public class ChatListener implements Listener {
 
     private final Main plugin;
     private final Player player;
-    private final int slot;
+    private int slot;
 
     public ChatListener(Player player, int slot) {
         this.plugin = Main.getPlugin();
@@ -21,15 +21,14 @@ public class ChatListener implements Listener {
 
     @EventHandler
     public void onChat(PlayerChatEvent event) {
-        // 채팅 메시지가 유효한 경우에만 처리 ㅋ
         String message = event.getMessage();
         if (message != null && !message.isEmpty()) {
-            // config에 아이템 이름을 설정 ㅋ
             plugin.getConfig().set("reward." + slot + ".itemName", message);
             plugin.saveConfig();
             player.sendMessage("이름 설정이 완료되었습니다.");
         }
-        // 채팅 이벤트를 제거 ㅋ
+
+        // 이벤트 핸들러를 제거합니다.
         HandlerList.unregisterAll(this);
         event.setCancelled(true);
     }

@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import static io.leeple.level.utils.PlayerDataUtil.config;
+import static io.leeple.level.utils.PlayerDataUtil.playerFile;
+
 public final class Main extends JavaPlugin implements Listener, CommandExecutor {
 
     private final Map<UUID, BukkitTask> actionBarTasks = new HashMap<>();
@@ -68,13 +71,13 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
     }
 
     //플레이어의 uuid명으로 생성된 config에 레벨정보를 기본적으로 추가
-    public void createPlayerDefaults(UUID uuid) {
+    public void createPlayerDefaults(UUID uuid, Player player) {
         File playerFile = new File(uuidFolder, uuid.toString() + ".yml");
         YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playerFile);
         playerConfig.addDefault("Level", "1");
         playerConfig.addDefault("EXP", "0/10");
         playerConfig.options().copyDefaults(true);
-        saveYamlConfiguration(playerConfig, YamlConfiguration.loadConfiguration(playerFile));
+        saveYamlConfiguration(player);
     }
 
     public void updateActionBar(Player player, String message) {
@@ -128,9 +131,9 @@ public final class Main extends JavaPlugin implements Listener, CommandExecutor 
 
 
     //저장
-    public void saveYamlConfiguration(YamlConfiguration config, YamlConfiguration file) {
+    public void saveYamlConfiguration(Player player) {
         try {
-            config.save(String.valueOf(file));
+            config.save(playerFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
