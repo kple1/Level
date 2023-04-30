@@ -15,15 +15,12 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
-    maven { url "https://repo.dmulloy2.net/repository/public/"
-    }
 }
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT"
-    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.8.0";
 }
 
 jar {
-    destinationDirectory.set(file('C:\\Users\\Leepl\\Desktop\\개발자료\\developserver\\plugins')) // Build Section
+    destinationDirectory.set(file('C:\\Users\\User\\Desktop\\developserver\\plugins')) // Build Section
 }

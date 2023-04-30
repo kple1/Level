@@ -22,7 +22,14 @@ public class ItemManager {
         return stack;
     }
 
-    public static final ItemStack barrier = result_LongType(Material.BARRIER,1,(ColorUtils.chat("&c채울 수 없는 칸 입니다.")));
+    public static ItemStack result_NameType(Material type, int amount, String displayName) {
+        ItemStack stack = new ItemStack(type, amount);
+        ItemMeta meta = stack.getItemMeta();
+        meta.setDisplayName(displayName);
+        return stack;
+    }
+
+    public static final ItemStack barrier = result_LongType(Material.BARRIER, 1, (ColorUtils.chat("&c채울 수 없는 칸 입니다.")));
     public static final ItemStack NextPage = result_ShortType(Material.OAK_BUTTON, 1);
     public static final ItemStack RewardDesigned = result_ShortType(Material.BLACK_STAINED_GLASS_PANE, 1);
     public static final ItemStack NameTag = result_LongType(Material.NAME_TAG, 1, (ColorUtils.chat("&f[&7 보상이름 설정 &f]")));

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Desktop.Level.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Desktop.Level.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Level.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Level.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo.Level.main.iml" filepath="$PROJECT_DIR$/.idea/modules/demo.Level.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/io.leeple.Level.main.iml" filepath="$PROJECT_DIR$/.idea/modules/io.leeple.Level.main.iml" />
     </modules>
   </component>

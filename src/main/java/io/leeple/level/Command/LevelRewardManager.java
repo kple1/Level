@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +16,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import static io.leeple.level.Main.plugin;
@@ -44,7 +46,8 @@ public class LevelRewardManager implements CommandExecutor, Listener {
             if (event.getSlot() == 11) {
                 player.closeInventory();
                 player.sendMessage("아이템 이름을 채팅으로 입력해주세요:");
-                Bukkit.getPluginManager().registerEvents(new ChatListener(player, event.getSlot()), plugin);
+                int saveSlot = Integer.parseInt(plugin.getConfig().getString("saveSlot"));
+                Bukkit.getPluginManager().registerEvents(new ChatListener(player, saveSlot), plugin);
             }
         }
     }
@@ -81,9 +84,18 @@ public class LevelRewardManager implements CommandExecutor, Listener {
         this.inventory = Bukkit.createInventory(null, 54, "관리자설정");
         for (int i = 0; i < 36; i++) {
             ItemStack item = plugin.getConfig().getItemStack("reward." + i + ".item");
+            String name = plugin.getConfig().getString("reward." + i + ".itemName");
             inventory.setItem(i, item);
         }
         player.openInventory(inventory);
+    }
+
+    @EventHandler
+    public void historyfunction(InventoryClickEvent event) {
+        if (event.getView().getTitle().equals("관리자설정")) {
+            plugin.getConfig().set("saveSlot", event.getSlot());
+            plugin.saveConfig();
+        }
     }
 
     public void ItemList() {
