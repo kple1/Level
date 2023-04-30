@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import static io.leeple.level.Data.PlayerData.playerFile;
+
 public class GetLevelEXP implements Listener {
 
     Main plugin = Main.getPlugin();
@@ -30,19 +32,6 @@ public class GetLevelEXP implements Listener {
 
         if (!(entity instanceof Pig) || player == null) {
             return;
-        }
-
-        //UUID 파일 가져오기
-        UUID uuid = player.getUniqueId();
-        File playerFile = new File(plugin.getUuidFolder(), uuid.toString() + ".yml");
-
-        //UUID 파일이 없으면 생성
-        if (!playerFile.exists()) {
-            try {
-                playerFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         if (entity instanceof Pig) {
