@@ -23,8 +23,6 @@ public class LevelRewardManager implements CommandExecutor, Listener {
 
     private Inventory inventory;
     private Inventory Rinventory;
-    private String message;
-    private int previousSlot = -1;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -49,12 +47,6 @@ public class LevelRewardManager implements CommandExecutor, Listener {
                 Bukkit.getPluginManager().registerEvents(new ChatListener(player, event.getSlot()), plugin);
             }
         }
-    }
-
-
-    @EventHandler
-    public void onChat(PlayerChatEvent event) {
-        message = event.getMessage();
     }
 
     /* 관리자설정 아이템을 클릭시 아이콘에 대한 설정창 오픈 */
