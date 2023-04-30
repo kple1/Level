@@ -1,4 +1,4 @@
-package io.leeple.level.command;
+package io.leeple.level.Command;
 
 import io.leeple.level.Data.PlayerData;
 import org.bukkit.command.Command;

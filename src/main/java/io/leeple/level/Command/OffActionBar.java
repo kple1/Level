@@ -1,4 +1,4 @@
-package io.leeple.level.command;
+package io.leeple.level.Command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

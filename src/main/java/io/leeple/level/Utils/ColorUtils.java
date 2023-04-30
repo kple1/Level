@@ -1,4 +1,4 @@
-package io.leeple.level.utils;
+package io.leeple.level.Utils;
 
 import org.bukkit.ChatColor;
 

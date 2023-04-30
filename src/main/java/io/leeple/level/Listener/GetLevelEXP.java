@@ -1,7 +1,7 @@
 package io.leeple.level.Listener;
 
 import io.leeple.level.Main;
-import io.leeple.level.utils.ColorUtils;
+import io.leeple.level.Utils.ColorUtils;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

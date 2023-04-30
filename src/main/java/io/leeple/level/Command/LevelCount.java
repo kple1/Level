@@ -1,7 +1,7 @@
-package io.leeple.level.command;
+package io.leeple.level.Command;
 
 import io.leeple.level.Main;
-import io.leeple.level.utils.ColorUtils;
+import io.leeple.level.Utils.ColorUtils;
 import io.leeple.level.Data.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

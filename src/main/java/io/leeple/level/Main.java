@@ -1,8 +1,8 @@
 package io.leeple.level;
 
 import io.leeple.level.Listener.CreateFile;
-import io.leeple.level.command.LevelCommand;
-import io.leeple.level.command.LevelRewardManager;
+import io.leeple.level.Command.LevelCommand;
+import io.leeple.level.Command.LevelRewardManager;
 import io.leeple.level.Listener.GetLevelEXP;
 import io.leeple.level.Listener.ItemClickCancel;
 import org.bukkit.Bukkit;

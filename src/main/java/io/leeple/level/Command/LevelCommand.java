@@ -1,6 +1,5 @@
-package io.leeple.level.command;
+package io.leeple.level.Command;
 
-import io.leeple.level.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
