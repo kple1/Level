@@ -1,5 +1,6 @@
 package io.leeple.level;
 
+import io.leeple.level.Command.LevelReward;
 import io.leeple.level.Listener.CreateFile;
 import io.leeple.level.Command.LevelCommand;
 import io.leeple.level.Command.LevelRewardManager;
@@ -33,6 +34,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
         Bukkit.getPluginManager().registerEvents(new GetLevelEXP(), this);
         Bukkit.getPluginManager().registerEvents(new LevelRewardManager(), this);
         Bukkit.getPluginManager().registerEvents(new CreateFile(), this);
+        Bukkit.getPluginManager().registerEvents(new LevelReward(), this);
     }
 
     public void Config() {

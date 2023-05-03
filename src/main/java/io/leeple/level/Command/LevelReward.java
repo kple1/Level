@@ -10,6 +10,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,7 +22,7 @@ import java.util.*;
 
 import static io.leeple.level.Main.plugin;
 
-public class LevelReward implements CommandExecutor {
+public class LevelReward implements CommandExecutor, Listener {
 
     private Inventory inv;
     ItemStack userLevel;
@@ -72,6 +75,22 @@ public class LevelReward implements CommandExecutor {
         for (int i = 0; i < 36; i++) {
             ItemStack item = plugin.getConfig().getItemStack("reward." + i + ".item");
             inv.setItem(i, item);
+        }
+    }
+
+    @EventHandler
+    public void ClickReward(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        for (int i = 0; i < 36; i++) {
+            if (event.getView().getTitle().equals("레벨보상")) {
+                if (event.getSlot() == i) {
+                    ItemStack reward = plugin.getConfig().getItemStack("reward." + i + ".itemReward");
+                    if (reward == null) {
+                        continue;
+                    }
+                    player.getInventory().addItem(reward);
+                }
+            }
         }
     }
 
