@@ -7,6 +7,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.io.File;
 import java.util.UUID;
@@ -41,9 +43,25 @@ public class PlayerData {
                 } else {
                     config = YamlConfiguration.loadConfiguration(playerFile);
                 }
-                return config;//config 변수를 반환하도록 수정
+                return config;
             }
         }
         return null;
+    }
+
+    @EventHandler
+    public static YamlConfiguration ClickConfig(InventoryClickEvent event) {
+        if (event.getView().getTitle().equals("레벨보상")) {
+            Player player = (Player) event.getWhoClicked();
+            UUID targetUUID = player.getUniqueId();
+
+            playerFile = new File(Main.getPlugin().getUuidFolder(), "plugins/Level/UUIDs/" + targetUUID.toString() + ".yml");
+
+            if (!playerFile.exists()) {
+                Main.getPlugin().createPlayerDefaults(player);
+            }
+            config = YamlConfiguration.loadConfiguration(playerFile);
+        }
+        return config;
     }
 }

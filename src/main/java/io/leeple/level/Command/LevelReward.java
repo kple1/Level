@@ -1,5 +1,6 @@
 package io.leeple.level.Command;
 
+import io.leeple.level.Main;
 import io.leeple.level.Utils.ColorUtils;
 import io.leeple.level.Utils.ItemManager;
 import io.leeple.level.Data.PlayerData;
@@ -17,6 +18,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.yaml.snakeyaml.Yaml;
 
 import java.util.*;
 
@@ -80,19 +82,31 @@ public class LevelReward implements CommandExecutor, Listener {
 
     @EventHandler
     public void ClickReward(InventoryClickEvent event) {
+        YamlConfiguration config = PlayerData.ClickConfig(event);
         Player player = (Player) event.getWhoClicked();
-        for (int i = 0; i < 36; i++) {
-            if (event.getView().getTitle().equals("레벨보상")) {
-                if (event.getSlot() == i) {
-                    ItemStack reward = plugin.getConfig().getItemStack("reward." + i + ".itemReward");
-                    if (reward == null) {
-                        continue;
+        if (event.getView().getTitle().equals("레벨보상")) {
+            int clickedSlot = event.getRawSlot();
+            boolean canReceive = false; // 레벨이 충분해서 보상을 받을 수 있는지 여부를 저장하는 변수
+            for (int i = 0; i < 54; i++) {
+                ItemStack reward = plugin.getConfig().getItemStack("reward." + clickedSlot + ".itemReward" + i);
+                int limitLevel = Integer.parseInt(plugin.getConfig().getString("reward." + clickedSlot + ".limitlevel"));
+                int playerLevel = Integer.parseInt(config.getString("Level"));
+                if (reward != null) {
+                    if (playerLevel >= limitLevel) {
+                        canReceive = true;
+                        player.getInventory().addItem(reward);
                     }
-                    player.getInventory().addItem(reward);
                 }
+            }
+            if (canReceive) {
+                player.sendMessage("보상을 수령하였습니다.");
+            } else {
+                player.sendMessage(ColorUtils.chat("&c레벨이 낮아서 수령이 불가능합니다"));
             }
         }
     }
+
+
 
     /**
      * Item Designed
