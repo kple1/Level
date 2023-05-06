@@ -19,8 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static io.leeple.level.Data.PlayerData.config;
-import static io.leeple.level.Data.PlayerData.playerFile;
+import static io.leeple.level.Data.PlayerData.*;
 
 public final class Main extends JavaPlugin implements CommandExecutor {
 
@@ -102,6 +101,13 @@ public final class Main extends JavaPlugin implements CommandExecutor {
         }
     }
 
+    public void saveEventYamlConfiguration() {
+        try {
+            eventConfig.save(playerFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public File getUuidFolder() {
         return uuidFolder;
     }

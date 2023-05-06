@@ -16,6 +16,7 @@ import java.util.UUID;
 public class PlayerData {
 
     public static YamlConfiguration config;
+    public static YamlConfiguration eventConfig;
     public static File playerFile;
 
     public static YamlConfiguration Config(String[] args, CommandSender sender) {
@@ -60,8 +61,9 @@ public class PlayerData {
             if (!playerFile.exists()) {
                 Main.getPlugin().createPlayerDefaults(player);
             }
-            config = YamlConfiguration.loadConfiguration(playerFile);
+            eventConfig = YamlConfiguration.loadConfiguration(playerFile);
         }
-        return config;
+        return eventConfig;
     }
+
 }

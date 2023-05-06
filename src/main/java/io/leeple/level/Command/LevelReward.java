@@ -18,7 +18,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import org.yaml.snakeyaml.Yaml;
 
 import java.util.*;
 
@@ -80,31 +79,69 @@ public class LevelReward implements CommandExecutor, Listener {
         }
     }
 
+    // 수정하기
     @EventHandler
-    public void ClickReward(InventoryClickEvent event) {
-        YamlConfiguration config = PlayerData.ClickConfig(event);
+    public void saveClickReward(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
+        YamlConfiguration config = PlayerData.ClickConfig(event);
+        int slot = event.getRawSlot();
+
         if (event.getView().getTitle().equals("레벨보상")) {
-            int clickedSlot = event.getRawSlot();
-            boolean canReceive = false; // 레벨이 충분해서 보상을 받을 수 있는지 여부를 저장하는 변수
-            for (int i = 0; i < 54; i++) {
-                ItemStack reward = plugin.getConfig().getItemStack("reward." + clickedSlot + ".itemReward" + i);
-                int limitLevel = Integer.parseInt(plugin.getConfig().getString("reward." + clickedSlot + ".limitlevel"));
-                int playerLevel = Integer.parseInt(config.getString("Level"));
-                if (reward != null) {
-                    if (playerLevel >= limitLevel) {
-                        canReceive = true;
-                        player.getInventory().addItem(reward);
-                    }
-                }
+            String rewardKey = slot + "번 보상 수령여부";
+            if (config.getString(rewardKey, "").equals("X")) {
+                return; // 이미 보상을 수령한 경우, 처리하지 않고 종료
             }
-            if (canReceive) {
-                player.sendMessage("보상을 수령하였습니다.");
+
+            config.set(rewardKey, "X");
+            Main.getPlugin().saveEventYamlConfiguration();
+        }
+    }
+
+
+    // 수정하기
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
+        if (!event.getView().getTitle().equals("레벨보상")) {
+            return;
+        }
+
+        Player player = (Player) event.getWhoClicked();
+        YamlConfiguration eventConfig = PlayerData.ClickConfig(event);
+        int clickedSlot = event.getRawSlot();
+        String saveReward = eventConfig.getString(clickedSlot + "번 보상 수령여부");
+        int limitLevel = Integer.parseInt(plugin.getConfig().getString("reward." + clickedSlot + ".limitlevel"));
+        int playerLevel = Integer.parseInt(eventConfig.getString("Level"));
+
+        for (int i = 0; ; i++) {
+            ItemStack reward = plugin.getConfig().getItemStack("reward." + clickedSlot + ".itemReward" + i);
+            if (reward == null) {
+                break;
+            }
+
+            if (playerLevel >= limitLevel) {
+                if (Objects.equals(saveReward, "X")) {
+                    player.getInventory().addItem(reward);
+                    player.sendMessage("보상을 수령하였습니다.");
+                    eventConfig.set(clickedSlot + "번 보상 수령여부", "O");
+                    Main.getPlugin().saveEventYamlConfiguration();
+                    break; // 보상을 수령하면 루프 종료
+                }
             } else {
-                player.sendMessage(ColorUtils.chat("&c레벨이 낮아서 수령이 불가능합니다"));
+                player.sendMessage("레벨이 낮아서 수령이 불가능합니다.");
+                break; // 레벨이 낮으면 루프 종료
+            }
+
+            if (Objects.equals(saveReward, "O")) {
+                player.sendMessage(ColorUtils.chat("&c이미 수령한 보상입니다"));
+                event.setCancelled(true);
+                break; // 이미 보상을 수령했으면 루프 종료
             }
         }
     }
+
+
+
+
 
 
 
