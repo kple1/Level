@@ -82,20 +82,20 @@ public class LevelReward implements CommandExecutor, Listener {
     // 수정하기
     @EventHandler
     public void saveClickReward(InventoryClickEvent event) {
-        Player player = (Player) event.getWhoClicked();
         YamlConfiguration config = PlayerData.ClickConfig(event);
         int slot = event.getRawSlot();
+        String rewardKey = slot + "번 보상 수령여부";
 
-        if (event.getView().getTitle().equals("레벨보상")) {
-            String rewardKey = slot + "번 보상 수령여부";
-            if (config.getString(rewardKey, "").equals("X")) {
-                return; // 이미 보상을 수령한 경우, 처리하지 않고 종료
-            }
+        if (!event.getView().getTitle().equals("레벨보상")) {
+            return;
+        }
 
+        if (!config.getString(rewardKey, "").equals("X")) {
             config.set(rewardKey, "X");
             Main.getPlugin().saveEventYamlConfiguration();
         }
     }
+
 
 
     // 수정하기
