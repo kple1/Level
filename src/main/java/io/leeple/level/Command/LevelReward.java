@@ -82,16 +82,15 @@ public class LevelReward implements CommandExecutor, Listener {
     // 수정하기
     @EventHandler
     public void saveClickReward(InventoryClickEvent event) {
-        Player player = (Player) event.getWhoClicked();
         YamlConfiguration config = PlayerData.ClickConfig(event);
         int slot = event.getRawSlot();
+        String rewardKey = slot + "번 보상 수령여부";
 
-        if (event.getView().getTitle().equals("레벨보상")) {
-            String rewardKey = slot + "번 보상 수령여부";
-            if (config.getString(rewardKey, "").equals("X")) {
-                return; // 이미 보상을 수령한 경우, 처리하지 않고 종료
-            }
+        if (!event.getView().getTitle().equals("레벨보상")) {
+            return;
+        }
 
+        if (!config.getString(rewardKey, "").equals("X")) {
             config.set(rewardKey, "X");
             Main.getPlugin().saveEventYamlConfiguration();
         }
@@ -119,30 +118,25 @@ public class LevelReward implements CommandExecutor, Listener {
             }
 
             if (playerLevel >= limitLevel) {
-                if (Objects.equals(saveReward, "X")) {
+                if (saveReward.equals("X")) {
                     player.getInventory().addItem(reward);
                     player.sendMessage("보상을 수령하였습니다.");
                     eventConfig.set(clickedSlot + "번 보상 수령여부", "O");
                     Main.getPlugin().saveEventYamlConfiguration();
                     break; // 보상을 수령하면 루프 종료
+
+                } else if (saveReward.equals("O")) {
+                    player.sendMessage(ColorUtils.chat("&c이미 수령한 보상입니다"));
+                    event.setCancelled(true);
+                    break; // 이미 보상을 수령했으면 루프 종료
                 }
+
             } else {
                 player.sendMessage("레벨이 낮아서 수령이 불가능합니다.");
                 break; // 레벨이 낮으면 루프 종료
             }
-
-            if (Objects.equals(saveReward, "O")) {
-                player.sendMessage(ColorUtils.chat("&c이미 수령한 보상입니다"));
-                event.setCancelled(true);
-                break; // 이미 보상을 수령했으면 루프 종료
-            }
         }
     }
-
-
-
-
-
 
 
     /**
