@@ -97,7 +97,6 @@ public class LevelReward implements CommandExecutor, Listener {
         }
     }
 
-
     // 수정하기
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
@@ -119,7 +118,7 @@ public class LevelReward implements CommandExecutor, Listener {
             }
 
             if (playerLevel >= limitLevel) {
-                if (Objects.equals(saveReward, "X")) {
+                if (Objects.equals(saveReward, "O")) {
                     player.getInventory().addItem(reward);
                     player.sendMessage("보상을 수령하였습니다.");
                     eventConfig.set(clickedSlot + "번 보상 수령여부", "O");
@@ -139,15 +138,6 @@ public class LevelReward implements CommandExecutor, Listener {
         }
     }
 
-
-
-
-
-
-
-    /**
-     * Item Designed
-     */
     public void ItemList() {
         ItemStack Designed = ItemManager.RewardDesigned;
         int i;
