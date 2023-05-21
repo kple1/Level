@@ -101,13 +101,6 @@ public final class Main extends JavaPlugin implements CommandExecutor {
         }
     }
 
-    public void saveEventYamlConfiguration() {
-        try {
-            eventConfig.save(playerFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     public File getUuidFolder() {
         return uuidFolder;
     }

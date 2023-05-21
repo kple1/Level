@@ -11,13 +11,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
 
 public class PlayerData {
 
     public static YamlConfiguration config;
-    public static YamlConfiguration eventConfig;
     public static File playerFile;
+    public static YamlConfiguration eventConfig;
 
     public static YamlConfiguration Config(String[] args, CommandSender sender) {
         if (sender instanceof Player player) {
@@ -66,4 +67,13 @@ public class PlayerData {
         return eventConfig;
     }
 
+    public static void saveEventYamlConfiguration() {
+        try {
+            eventConfig.save(playerFile);
+            // 저장 성공 메시지 등을 추가로 처리할 수 있습니다.
+        } catch (IOException e) {
+            e.printStackTrace();
+            // 저장 실패 처리를 할 수 있습니다.
+        }
+    }
 }

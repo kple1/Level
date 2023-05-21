@@ -1,5 +1,6 @@
 package io.leeple.level.Listener;
 
+import io.leeple.level.Data.PlayerData;
 import io.leeple.level.Main;
 import io.leeple.level.Utils.ColorUtils;
 import org.bukkit.Sound;
@@ -34,7 +35,7 @@ public class GetLevelEXP implements Listener {
             return;
         }
 
-        if (entity instanceof Pig) {
+        if (!(entity instanceof Pig)) {
             player.sendMessage(ColorUtils.chat(Level + "돼지를 죽여서 3XP를 획득하셨습니다."));
         }
 
@@ -56,7 +57,7 @@ public class GetLevelEXP implements Listener {
             currentExp = remainder; // 나머지 EXP를 새로운 currentExp로 지정
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
             player.sendMessage(ColorUtils.chat(Level + "&c&ka &a" + level + "&f레벨이 되었습니다. &c&ka&f"));
-            player.sendTitle(ColorUtils.chat(LevelUP), "", 10, 70, 20);
+            player.sendTitle(ColorUtils.chat(LevelUP), "" , 10, 70, 20);
         } else {
             currentExp = newExp; // 그 외에는 그대로 저장
         }

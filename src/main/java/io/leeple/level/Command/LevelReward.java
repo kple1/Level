@@ -19,6 +19,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
+import static io.leeple.level.Data.PlayerData.*;
+
 import java.util.*;
 
 import static io.leeple.level.Main.plugin;
@@ -89,12 +91,11 @@ public class LevelReward implements CommandExecutor, Listener {
             return;
         }
 
-        if (!config.getString(String.valueOf(slot), "").equals("X")) {
+        if (!config.contains(String.valueOf(slot))) {
             config.set(String.valueOf(slot), "X");
-            Main.getPlugin().saveEventYamlConfiguration();
+            PlayerData.saveEventYamlConfiguration();
         }
     }
-
 
 
     // 수정하기
@@ -112,36 +113,30 @@ public class LevelReward implements CommandExecutor, Listener {
         int playerLevel = Integer.parseInt(eventConfig.getString("Level"));
 
         for (int i = 0; ; i++) {
+
             ItemStack reward = plugin.getConfig().getItemStack("reward." + clickedSlot + ".itemReward" + i);
+
             if (reward == null) {
                 break;
             }
 
-            if (Objects.equals(saveReward, "O")) { // 이미 보상을 수령한 경우
-                player.sendMessage(ColorUtils.chat("&c이미 수령한 보상입니다"));
-                event.setCancelled(true);
-                break; // 이미 보상을 수령했으면 루프 종료
-            }
-
             if (playerLevel >= limitLevel) {
-                if (Objects.equals(saveReward, "X")) { // 보상 가능한 경우
+                if (Objects.equals(saveReward, "X")) {
                     player.getInventory().addItem(reward);
                     player.sendMessage("보상을 수령하였습니다.");
                     eventConfig.set(String.valueOf(clickedSlot), "O");
-                    Main.getPlugin().saveEventYamlConfiguration();
-                    break; // 보상을 수령하면 루프 종료
+                    PlayerData.saveEventYamlConfiguration();
+
+                } else if (Objects.equals(saveReward, "O")) {
+                    player.sendMessage(ColorUtils.chat("&c이미 수령한 보상입니다"));
+                    event.setCancelled(true);
                 }
+
             } else {
                 player.sendMessage("레벨이 낮아서 수령이 불가능합니다.");
-                break; // 레벨이 낮으면 루프 종료
             }
         }
     }
-
-
-        /**
-         * Item Designed
-         */
 
     public void ItemList() {
         ItemStack Designed = ItemManager.RewardDesigned;
