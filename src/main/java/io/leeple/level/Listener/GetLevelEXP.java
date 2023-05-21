@@ -1,11 +1,8 @@
 package io.leeple.level.Listener;
 
-import io.leeple.level.Data.PlayerData;
 import io.leeple.level.Main;
 import io.leeple.level.Utils.ColorUtils;
 import org.bukkit.Sound;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
@@ -13,9 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
 import static io.leeple.level.Data.PlayerData.config;
 import static io.leeple.level.Data.PlayerData.playerFile;

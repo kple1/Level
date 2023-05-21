@@ -1,12 +1,10 @@
 package io.leeple.level.Command;
 
-import io.leeple.level.Main;
 import io.leeple.level.Utils.ColorUtils;
 import io.leeple.level.Utils.ItemManager;
 import io.leeple.level.Data.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,9 +27,6 @@ public class LevelReward implements CommandExecutor, Listener {
     private Inventory inv;
     ItemStack userLevel;
 
-    /**
-     * Get function
-     */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
@@ -52,7 +47,6 @@ public class LevelReward implements CommandExecutor, Listener {
         return false;
     }
 
-    //** ItemStack */
     private static ItemStack Result1(Material type, int amount, String displayName, String... lore) {
         ItemStack stack = new ItemStack(type, amount);
         ItemMeta meta = stack.getItemMeta();
@@ -62,9 +56,6 @@ public class LevelReward implements CommandExecutor, Listener {
         return stack;
     }
 
-    /**
-     * Inventory Open & Settings
-     */
     public void Inventory(Player player) {
         this.inv = Bukkit.createInventory(null, 54, "레벨보상");
         inv.setItem(46, ItemManager.NextPage);
@@ -80,7 +71,6 @@ public class LevelReward implements CommandExecutor, Listener {
         }
     }
 
-    // 수정하기
     @EventHandler
     public void saveClickReward(InventoryClickEvent event) {
         YamlConfiguration config = PlayerData.ClickConfig(event);
@@ -96,9 +86,6 @@ public class LevelReward implements CommandExecutor, Listener {
         }
     }
 
-
-
-    // 수정하기
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!event.getView().getTitle().equals("레벨보상")) {

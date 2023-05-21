@@ -6,6 +6,7 @@ import io.leeple.level.Command.LevelCommand;
 import io.leeple.level.Command.LevelRewardManager;
 import io.leeple.level.Listener.GetLevelEXP;
 import io.leeple.level.Listener.ItemClickCancel;
+import io.leeple.level.Listener.MainLevelSystem;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -34,6 +35,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
         Bukkit.getPluginManager().registerEvents(new LevelRewardManager(), this);
         Bukkit.getPluginManager().registerEvents(new CreateFile(), this);
         Bukkit.getPluginManager().registerEvents(new LevelReward(), this);
+        Bukkit.getPluginManager().registerEvents(new MainLevelSystem(), this);
     }
 
     public void Config() {

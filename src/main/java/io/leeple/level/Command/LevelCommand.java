@@ -12,8 +12,8 @@ public class LevelCommand implements CommandExecutor {
         if (sender instanceof Player player) {
             if (args.length > 0) {
 
-
                 String arg = args[1];
+
                 switch (arg) {
                     case "초기화", "reset", "chrlghk" -> {
                         LevelReset RL = new LevelReset();
@@ -66,15 +66,9 @@ public class LevelCommand implements CommandExecutor {
                     }
                 }
             } else {
-                player.sendMessage("[ Level Command ] ");
-                player.sendMessage("1. /Level ( 레벨에 대한 명령어를 확인합니다. )");
-                player.sendMessage("2. /Level <User> Count  <number> ( 유저에게 number만큼 경험치를 추가합니다. )");
-                player.sendMessage("3. /Level <User> Discount  <number> ( 유저에게 number만큼 경험치를 차감합니다. )");
-                player.sendMessage("4. /Level <User> info ( 레벨정보를 확인합니다. )");
-                player.sendMessage("5. /Level <User> reset ( 레벨을 초기화 시킵니다. )");
-                player.sendMessage("6. /Level <User> Reward ( 레벨보상 인벤토리를 오픈합니다. )");
-                player.sendMessage("7. /Level <User> RewardManager ( 레벨보상 관리창을 오픈합니다. )");
-                player.sendMessage("8. /Level <User> On/Off ( 하단에 표시된 레벨정보 바를 키거나 끕니다. )");
+                Level Lv = new Level();
+                Lv.onCommand(sender, command, label, args);
+                player.sendMessage("확인되었습니다");
             }
         }
         return false;

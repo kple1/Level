@@ -17,5 +17,8 @@ public class ItemClickCancel implements Listener {
         if(ChatColor.stripColor(event.getView().getTitle()).equalsIgnoreCase("설정")) {
             event.setCancelled(true);
         }
+        if(ChatColor.stripColor(event.getView().getTitle()).equalsIgnoreCase("Level System")) {
+            event.setCancelled(true);
+        }
     }
 }
