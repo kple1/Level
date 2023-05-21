@@ -22,5 +22,5 @@ dependencies {
 }
 
 jar {
-    destinationDirectory.set(file('C:\\Users\\Leepl\\Desktop\\개발자료\\developserver\\plugins')) // Build Section
+    destinationDirectory.set(file('C:\\Users\\User\\Desktop\\developserver\\plugins')) // Build Section
 }
