@@ -89,9 +89,9 @@ public class LevelReward implements CommandExecutor, Listener {
             return;
         }
 
-        if (!config.getString(String.valueOf(slot), "").equals("X")) {
+        if (!config.contains(String.valueOf(slot))) {
             config.set(String.valueOf(slot), "X");
-            Main.getPlugin().saveEventYamlConfiguration();
+            PlayerData.saveEventYamlConfiguration();
         }
     }
 
@@ -120,7 +120,6 @@ public class LevelReward implements CommandExecutor, Listener {
             if (Objects.equals(saveReward, "O")) { // 이미 보상을 수령한 경우
                 player.sendMessage(ColorUtils.chat("&c이미 수령한 보상입니다"));
                 event.setCancelled(true);
-                break; // 이미 보상을 수령했으면 루프 종료
             }
 
             if (playerLevel >= limitLevel) {
@@ -128,12 +127,10 @@ public class LevelReward implements CommandExecutor, Listener {
                     player.getInventory().addItem(reward);
                     player.sendMessage("보상을 수령하였습니다.");
                     eventConfig.set(String.valueOf(clickedSlot), "O");
-                    Main.getPlugin().saveEventYamlConfiguration();
-                    break; // 보상을 수령하면 루프 종료
+                    PlayerData.saveEventYamlConfiguration();
                 }
             } else {
                 player.sendMessage("레벨이 낮아서 수령이 불가능합니다.");
-                break; // 레벨이 낮으면 루프 종료
             }
         }
     }
