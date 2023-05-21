@@ -6,6 +6,7 @@ import io.leeple.level.Utils.ItemManager;
 import io.leeple.level.Data.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -111,34 +112,39 @@ public class LevelReward implements CommandExecutor, Listener {
         int limitLevel = Integer.parseInt(plugin.getConfig().getString("reward." + clickedSlot + ".limitlevel"));
         int playerLevel = Integer.parseInt(eventConfig.getString("Level"));
 
+        boolean receivedReward = false; // 보상을 이미 수령했는지 여부를 나타내는 변수
+
         for (int i = 0; ; i++) {
             ItemStack reward = plugin.getConfig().getItemStack("reward." + clickedSlot + ".itemReward" + i);
             if (reward == null) {
                 break;
             }
 
-            if (Objects.equals(saveReward, "O")) { // 이미 보상을 수령한 경우
+            if (Objects.equals(saveReward, "O")) {
                 player.sendMessage(ColorUtils.chat("&c이미 수령한 보상입니다"));
                 event.setCancelled(true);
+                break;
             }
 
             if (playerLevel >= limitLevel) {
-                if (Objects.equals(saveReward, "X")) { // 보상 가능한 경우
+                if (Objects.equals(saveReward, "X")) {
                     player.getInventory().addItem(reward);
-                    player.sendMessage("보상을 수령하였습니다.");
                     eventConfig.set(String.valueOf(clickedSlot), "O");
                     PlayerData.saveEventYamlConfiguration();
+                    receivedReward = true; // 보상을 수령했음을 표시
                 }
             } else {
                 player.sendMessage("레벨이 낮아서 수령이 불가능합니다.");
+                break;
             }
         }
+
+        /* loop에서 벗어 나는 코드 */
+
+        if (receivedReward) {
+            player.sendMessage("보상을 수령하셨습니다!");
+        }
     }
-
-
-        /**
-         * Item Designed
-         */
 
     public void ItemList() {
         ItemStack Designed = ItemManager.RewardDesigned;

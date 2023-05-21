@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,8 +33,8 @@ public class LevelRewardManager implements CommandExecutor, Listener {
         if (sender instanceof Player player) {
             if (args.length > 0) {
                 if (player.isOp()) {
-                    ItemNameSettings(player);
-                    ItemList();
+                    itemNameSettings(player);
+                    itemList();
                 }
             }
         }
@@ -41,7 +42,7 @@ public class LevelRewardManager implements CommandExecutor, Listener {
     }
 
     @EventHandler
-    public void SettingsClick(InventoryClickEvent event) {
+    public void settingsClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         if (event.getView().getTitle().equals("설정")) {
             if (event.getSlot() == 11) {
@@ -54,7 +55,7 @@ public class LevelRewardManager implements CommandExecutor, Listener {
     }
 
     @EventHandler
-    public void ItemRewardSettings(InventoryClickEvent event) {
+    public void itemRewardSettings(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         if (event.getView().getTitle().equals("설정")) {
             if (event.getSlot() == 13) {
@@ -93,7 +94,7 @@ public class LevelRewardManager implements CommandExecutor, Listener {
         }
     }
 
-    public void ItemNameSettings(Player player) {
+    public void itemNameSettings(Player player) {
         this.inventory = Bukkit.createInventory(null, 54, "관리자설정");
         for (int i = 0; i < 36; i++) {
             // Item Name
@@ -126,7 +127,7 @@ public class LevelRewardManager implements CommandExecutor, Listener {
         }
     }
 
-    public void ItemList() {
+    public void itemList() {
         ItemStack Designed = ItemManager.barrier;
         int i;
         for (i = 36; i < 54; i++) {
@@ -135,7 +136,7 @@ public class LevelRewardManager implements CommandExecutor, Listener {
     }
 
     @EventHandler
-    public void CloseEvent(InventoryCloseEvent event) {
+    public void closeEvent(InventoryCloseEvent event) {
         if (event.getView().getTitle().equals("관리자설정")) {
             inventory = event.getInventory();
             for (int i = 0; i < 36; i++) {
@@ -153,17 +154,26 @@ public class LevelRewardManager implements CommandExecutor, Listener {
     }
 
     @EventHandler
-    public void RewardCloseEvent(InventoryCloseEvent event) {
-        if (event.getView().getTitle().equals("보상설정")) {
-            rewardInventory = event.getInventory();
-            for (int i = 0; i < 54; i++) {
-                ItemStack item = rewardInventory.getItem(i);
-                int saveSlot = Integer.parseInt(plugin.getConfig().getString("saveSlot"));
-                plugin.getConfig().set("reward." + saveSlot + ".itemReward" + i, item);
-                plugin.saveConfig();
+    public void rewardCloseEvent(InventoryCloseEvent event) {
+        if (!event.getView().getTitle().equals("보상설정")) {
+            return;
+        }
+
+        rewardInventory = event.getInventory();
+        int saveSlot = Integer.parseInt(plugin.getConfig().getString("saveSlot"));
+        ConfigurationSection rewardSection = plugin.getConfig().getConfigurationSection("reward." + saveSlot);
+
+        for (int i = 0; i < 54; i++) {
+            ItemStack item = rewardInventory.getItem(i);
+            if (item != null) {
+                rewardSection.set("itemReward" + i, item);
             }
         }
+
+        plugin.saveConfig();
     }
+
+
 
 
     public void getRewardSettings(Player player) {

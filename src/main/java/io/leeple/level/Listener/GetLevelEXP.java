@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import static io.leeple.level.Data.PlayerData.config;
 import static io.leeple.level.Data.PlayerData.playerFile;
 
 public class GetLevelEXP implements Listener {
@@ -35,13 +36,11 @@ public class GetLevelEXP implements Listener {
             return;
         }
 
-        if (!(entity instanceof Pig)) {
-            player.sendMessage(ColorUtils.chat(Level + "돼지를 죽여서 3XP를 획득하셨습니다."));
-        }
+        player.sendMessage(ColorUtils.chat(Level + "돼지를 죽여서 3XP를 획득하셨습니다."));
 
-        FileConfiguration playerConfig = YamlConfiguration.loadConfiguration(playerFile);
-        int level = playerConfig.getInt("Level", 1);
-        String expString = playerConfig.getString("EXP");
+
+        int level = config.getInt("Level");
+        String expString = config.getString("EXP");
         String[] expSplit = expString.split("/");
         int currentExp = Integer.parseInt(expSplit[0]);
         int maxExp = Integer.parseInt(expSplit[1]);
@@ -62,10 +61,10 @@ public class GetLevelEXP implements Listener {
             currentExp = newExp; // 그 외에는 그대로 저장
         }
 
-        playerConfig.set("Level", level);
-        playerConfig.set("EXP", currentExp + "/" + maxExp);
+        config.set("Level", level);
+        config.set("EXP", currentExp + "/" + maxExp);
         try {
-            playerConfig.save(playerFile);
+            config.save(playerFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
