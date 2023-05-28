@@ -21,9 +21,7 @@ public class LevelReset implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
             String playerName = player.getName();
-            if (args.length == 0) {
-                sender.sendMessage("/레벨 초기화 " + "플레이어 닉네임");
-            }
+
             if (player.isOp()) {
                 YamlConfiguration config = PlayerData.Config(args, sender);
                 config.set("Level", "1");

@@ -8,16 +8,16 @@ import org.jetbrains.annotations.NotNull;
 
 import static io.leeple.level.Main.plugin;
 
-public class LevelLimit implements CommandExecutor {
+public class SetKillEntity implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
             if (args.length >= 2) {
                 if (player.isOp()) {
                     try {
-                        plugin.getConfig().set("maxLevel", Integer.parseInt(args[1]));
+                        plugin.getConfig().set("setKillEntity", args[1]);
                         plugin.saveConfig();
-                        player.sendMessage("최대 레벨 제한이 설정되었습니다.");
+                        player.sendMessage("설정이 저장되었습니다");
                     } catch (NumberFormatException e) {
                         player.sendMessage("잘못된 숫자 형식입니다.");
                     }
