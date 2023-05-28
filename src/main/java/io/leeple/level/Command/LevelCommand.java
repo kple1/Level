@@ -4,7 +4,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.K;
 import org.jetbrains.annotations.NotNull;
 
 public class LevelCommand implements CommandExecutor {
