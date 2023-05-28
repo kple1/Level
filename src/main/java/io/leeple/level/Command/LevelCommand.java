@@ -7,14 +7,14 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class LevelCommand implements CommandExecutor {
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
-            if (args.length > 0) {
 
-                String arg = args[1];
+                String arg0 = args[1];
 
-                switch (arg) {
+                switch (arg0) {
                     case "초기화", "reset", "chrlghk" -> {
                         LevelReset RL = new LevelReset();
                         RL.onCommand(sender, command, label, args);
@@ -55,6 +55,11 @@ public class LevelCommand implements CommandExecutor {
                         LRM.onCommand(sender, command, label, args);
                     }
 
+                    case "제한설정" -> {
+                        LevelLimit LL = new LevelLimit();
+                        LL.onCommand(sender, command, label, args);
+                    }
+
                     /** PlayerDataUtil Test Command */
                     case "Test" -> {
                         TestPlayerDataUtil TPD = new TestPlayerDataUtil();
@@ -68,9 +73,7 @@ public class LevelCommand implements CommandExecutor {
             } else {
                 Level Lv = new Level();
                 Lv.onCommand(sender, command, label, args);
-                player.sendMessage("확인되었습니다");
             }
-        }
         return false;
     }
 }
