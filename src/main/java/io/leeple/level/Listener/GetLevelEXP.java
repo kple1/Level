@@ -61,7 +61,7 @@ public class GetLevelEXP implements Listener {
 
         config.set("Level", level);
         config.set("EXP", currentExp + "/" + maxExp);
-        Main.getPlugin().saveYamlConfiguration(player);
+        Main.getPlugin().noMessageSaveConfig();
 
         plugin.updateActionBar(player, ColorUtils.chat("[ &b" + player.getName() + "&f님의 레벨정보: " + "&aLevel&f: " + level + " / " + "&aEXP&f: " + currentExp + "/" + maxExp + " ]"));
     }
