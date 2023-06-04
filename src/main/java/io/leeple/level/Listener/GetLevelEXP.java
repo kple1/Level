@@ -3,12 +3,12 @@ package io.leeple.level.Listener;
 import io.leeple.level.Main;
 import io.leeple.level.Utils.ColorUtils;
 import org.bukkit.Sound;
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+
+import java.util.List;
 
 import static io.leeple.level.Data.PlayerData.config;
 
@@ -22,15 +22,14 @@ public class GetLevelEXP implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         LivingEntity entity = event.getEntity();
         Player player = entity.getKiller();
-        int maxLevel = plugin.getConfig().getInt("maxLevel");
-        String killEntity = plugin.getConfig().getString("setKillEntity");
+        List<String> existingAnimals = plugin.getConfig().getStringList("setKillEntity");
+        EntityType killEntityType = EntityType.valueOf(existingAnimals.toString().toUpperCase());
 
-        //수정
-        if (entity instanceof Animals && entity.getType().name().equalsIgnoreCase(killEntity) || player == null) {
+        if (entity.getType() != killEntityType) {
             return;
         }
 
-
+        int maxLevel = plugin.getConfig().getInt("maxLevel");
         int level = config.getInt("Level");
         String expString = config.getString("EXP");
         String[] expSplit = expString.split("/");

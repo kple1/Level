@@ -8,13 +8,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-public class PlayerData {
+public class PlayerData implements Listener {
 
     public static YamlConfiguration config;
     public static File playerFile;
