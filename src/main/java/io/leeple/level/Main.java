@@ -1,6 +1,7 @@
 package io.leeple.level;
 
 import io.leeple.level.Command.LevelReward;
+import io.leeple.level.Command.SetKillEntity;
 import io.leeple.level.Listener.CreateFile;
 import io.leeple.level.Command.LevelCommand;
 import io.leeple.level.Command.LevelRewardManager;
@@ -36,6 +37,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
         Bukkit.getPluginManager().registerEvents(new CreateFile(), this);
         Bukkit.getPluginManager().registerEvents(new LevelReward(), this);
         Bukkit.getPluginManager().registerEvents(new MainLevelSystem(), this);
+        Bukkit.getPluginManager().registerEvents(new SetKillEntity(), this);
     }
 
     public void Config() {

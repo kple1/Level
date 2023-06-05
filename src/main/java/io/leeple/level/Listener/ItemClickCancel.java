@@ -20,7 +20,10 @@ public class ItemClickCancel implements Listener {
         if(ChatColor.stripColor(event.getView().getTitle()).equalsIgnoreCase("Level System")) {
             event.setCancelled(true);
         }
-        if(ChatColor.stripColor(event.getView().getTitle()).equalsIgnoreCase("동물킬 경험치 설정")) {
+        if(ChatColor.stripColor(event.getView().getTitle()).equalsIgnoreCase("동물킬 경험치 설정 (1 Page)")) {
+            event.setCancelled(true);
+        }
+        if(ChatColor.stripColor(event.getView().getTitle()).equalsIgnoreCase("동물킬 경험치 설정 (2 Page)")) {
             event.setCancelled(true);
         }
     }
