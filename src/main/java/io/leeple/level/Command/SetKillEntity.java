@@ -2,7 +2,6 @@ package io.leeple.level.Command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,11 +9,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 import static io.leeple.level.Main.plugin;
 
@@ -33,24 +33,6 @@ public class SetKillEntity implements CommandExecutor, Listener {
             }
         }
         return false;
-    }
-
-    @EventHandler
-    public void closeEvent(InventoryCloseEvent event) {
-        if (event.getView().getTitle().equals("동물킬 경험치 설정 (1 Page)")) {
-            inv = event.getInventory();
-            for (int i = 0; i < 54; i++) {
-                ItemStack item = inv.getItem(i);
-                if (item != null) {
-                    plugin.getConfig().set("animal." + i + ".item", item);
-                    plugin.getConfig().set("animal." + i + ".slot", i);
-                } else {
-                    plugin.getConfig().set("animal." + i + ".item", null);
-                    plugin.getConfig().set("animal." + i + ".slot", null);
-                }
-            }
-            plugin.saveConfig();
-        }
     }
 
     public void inventory(Player player) {
@@ -97,24 +79,6 @@ public class SetKillEntity implements CommandExecutor, Listener {
     }
 
     @EventHandler
-    public void close2pageEvent(InventoryCloseEvent event) {
-        if (event.getView().getTitle().equals("동물킬 경험치 설정 (2 Page)")) {
-            inv = event.getInventory();
-            for (int i = 0; i < 54; i++) {
-                ItemStack item = inv.getItem(i);
-                if (item != null) {
-                    plugin.getConfig().set("animal2." + i + ".item", item);
-                    plugin.getConfig().set("animal2." + i + ".slot", i);
-                } else {
-                    plugin.getConfig().set("animal2." + i + ".item", null);
-                    plugin.getConfig().set("animal2." + i + ".slot", null);
-                }
-            }
-            plugin.saveConfig();
-        }
-    }
-
-    @EventHandler
     public void beforePageEvent(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         if (event.getView().getTitle().equals("동물킬 경험치 설정 (2 Page)")) {
@@ -131,6 +95,39 @@ public class SetKillEntity implements CommandExecutor, Listener {
                     nextPage.setItem(i, item);
                 }
                 player.openInventory(inv);
+            }
+        }
+    }
+
+    /* 수정하기 클릭시 설정된 엔티티 표시 */
+    @EventHandler
+    public void setKillEntity(InventoryClickEvent event) {
+        if (event.getView().getTitle().equals("동물킬 경험치 설정 (1 Page)") || event.getView().getTitle().equals("동물킬 경험치 설정 (2 Page)")) {
+            int clickedSlot = event.getSlot();
+            ItemStack clickedItem = event.getInventory().getItem(clickedSlot);
+
+            if (clickedItem != null) {
+                // 선택한 아이템의 로어를 가져오기
+                ItemMeta itemMeta = clickedItem.getItemMeta();
+                List<String> lore = itemMeta.getLore();
+
+                if (lore != null) {
+                    String currentLore = lore.get(clickedSlot % 54);
+
+                    if (currentLore.equals(" > 설정된 엔티티입니다")) {
+                        // 로어를 공백으로 채우기
+                        lore.set(clickedSlot % 54, "");
+                    } else {
+                        // 로어를 " > 설정된 엔티티입니다"로 변경
+                        lore.set(clickedSlot % 54, " > 설정된 엔티티입니다");
+                    }
+
+                    itemMeta.setLore(lore);
+                    clickedItem.setItemMeta(itemMeta);
+
+                    // 인벤토리 업데이트
+                    event.getInventory().setItem(clickedSlot, clickedItem);
+                }
             }
         }
     }

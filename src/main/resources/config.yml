@@ -1,0 +1,463 @@
+animal:
+  '0':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ALLAY_SPAWN_EGG
+    slot: 0
+  '1':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: AXOLOTL_SPAWN_EGG
+    slot: 1
+  '2':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: BAT_SPAWN_EGG
+    slot: 2
+  '3':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: BEE_SPAWN_EGG
+    slot: 3
+  '4':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: BLAZE_SPAWN_EGG
+    slot: 4
+  '5':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: CAT_SPAWN_EGG
+    slot: 5
+  '6':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: CAVE_SPIDER_SPAWN_EGG
+    slot: 6
+  '7':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: CHICKEN_SPAWN_EGG
+    slot: 7
+  '8': {}
+  '9':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: COD_SPAWN_EGG
+    slot: 9
+  '10':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: COW_SPAWN_EGG
+    slot: 10
+  '11':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: CREEPER_SPAWN_EGG
+    slot: 11
+  '12':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: DOLPHIN_SPAWN_EGG
+    slot: 12
+  '13':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: DONKEY_SPAWN_EGG
+    slot: 13
+  '14':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: DROWNED_SPAWN_EGG
+    slot: 14
+  '15':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ELDER_GUARDIAN_SPAWN_EGG
+    slot: 15
+  '16':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ENDERMAN_SPAWN_EGG
+    slot: 16
+  '17':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ENDERMITE_SPAWN_EGG
+    slot: 17
+  '18':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: EVOKER_SPAWN_EGG
+    slot: 18
+  '19':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: FOX_SPAWN_EGG
+    slot: 19
+  '20':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: FROG_SPAWN_EGG
+    slot: 20
+  '21':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: GHAST_SPAWN_EGG
+    slot: 21
+  '22':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: GLOW_SQUID_SPAWN_EGG
+    slot: 22
+  '23':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: GOAT_SPAWN_EGG
+    slot: 23
+  '24':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: GUARDIAN_SPAWN_EGG
+    slot: 24
+  '25':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: HOGLIN_SPAWN_EGG
+    slot: 25
+  '26':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: HORSE_SPAWN_EGG
+    slot: 26
+  '27':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: HUSK_SPAWN_EGG
+    slot: 27
+  '28':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: IRON_GOLEM_SPAWN_EGG
+    slot: 28
+  '29':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: LLAMA_SPAWN_EGG
+    slot: 29
+  '30':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: MAGMA_CUBE_SPAWN_EGG
+    slot: 30
+  '31':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: MOOSHROOM_SPAWN_EGG
+    slot: 31
+  '32':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: MULE_SPAWN_EGG
+    slot: 32
+  '33':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: OCELOT_SPAWN_EGG
+    slot: 33
+  '34':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: PANDA_SPAWN_EGG
+    slot: 34
+  '35':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: PARROT_SPAWN_EGG
+    slot: 35
+  '36':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: PHANTOM_SPAWN_EGG
+    slot: 36
+  '37':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: PIG_SPAWN_EGG
+    slot: 37
+  '38':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: PIGLIN_SPAWN_EGG
+    slot: 38
+  '39':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: PIGLIN_BRUTE_SPAWN_EGG
+    slot: 39
+  '40':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: PILLAGER_SPAWN_EGG
+    slot: 40
+  '41':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: POLAR_BEAR_SPAWN_EGG
+    slot: 41
+  '42':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: PUFFERFISH_SPAWN_EGG
+    slot: 42
+  '43':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: RABBIT_SPAWN_EGG
+    slot: 43
+  '44':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: RAVAGER_SPAWN_EGG
+    slot: 44
+  '53':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ARROW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"다음페이지"}],"text":""}'
+    slot: 53
+    itemName: '&a다음페이지'
+animal2:
+  '45':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ARROW
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"이전페이지"}],"text":""}'
+    slot: 45
+    itemName: '&a이전페이지'
+  '0':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: SALMON_SPAWN_EGG
+    slot: 0
+  '1':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: SHEEP_SPAWN_EGG
+    slot: 1
+  '2':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: SHULKER_SPAWN_EGG
+    slot: 2
+  '3':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: SILVERFISH_SPAWN_EGG
+    slot: 3
+  '4':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: SKELETON_HORSE_SPAWN_EGG
+    slot: 4
+  '5':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: SKELETON_SPAWN_EGG
+    slot: 5
+  '6':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: SLIME_SPAWN_EGG
+    slot: 6
+  '7':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: SNOW_GOLEM_SPAWN_EGG
+    slot: 7
+  '8':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: SPIDER_SPAWN_EGG
+    slot: 8
+  '9':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: SQUID_SPAWN_EGG
+    slot: 9
+  '10':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: STRAY_SPAWN_EGG
+    slot: 10
+  '11':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: STRIDER_SPAWN_EGG
+    slot: 11
+  '12':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: TADPOLE_SPAWN_EGG
+    slot: 12
+  '13':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: TRADER_LLAMA_SPAWN_EGG
+    slot: 13
+  '14':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: TROPICAL_FISH_SPAWN_EGG
+    slot: 14
+  '15':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: TURTLE_SPAWN_EGG
+    slot: 15
+  '16':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: VEX_SPAWN_EGG
+    slot: 16
+  '17':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: VILLAGER_SPAWN_EGG
+    slot: 17
+  '18':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: VINDICATOR_SPAWN_EGG
+    slot: 18
+  '19':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: WANDERING_TRADER_SPAWN_EGG
+    slot: 19
+  '20':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: WARDEN_SPAWN_EGG
+    slot: 20
+  '21':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: WITCH_SPAWN_EGG
+    slot: 21
+  '22':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: WITHER_SKELETON_SPAWN_EGG
+    slot: 22
+  '23':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: WOLF_SPAWN_EGG
+    slot: 23
+  '24':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ZOGLIN_SPAWN_EGG
+    slot: 24
+  '25':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ZOMBIE_SPAWN_EGG
+    slot: 25
+  '26':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ZOMBIE_HORSE_SPAWN_EGG
+    slot: 26
+  '27':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ZOMBIE_VILLAGER_SPAWN_EGG
+    slot: 27
+  '28':
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3337
+      type: ZOMBIFIED_PIGLIN_SPAWN_EGG
+    slot: 28
