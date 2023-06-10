@@ -33,11 +33,6 @@ public class LevelCommand implements CommandExecutor, TabExecutor {
                         levelMultiple.onCommand(sender, command, label, args);
                     }
 
-                    case "경험치설정" -> {
-                        KillEntityExp killEntityExp = new KillEntityExp();
-                        killEntityExp.onCommand(sender, command, label, args);
-                    }
-
                     case "킬설정" -> {
                         SetKillEntity setKillEntity = new SetKillEntity();
                         setKillEntity.onCommand(sender, command, label, args);
@@ -110,7 +105,6 @@ public class LevelCommand implements CommandExecutor, TabExecutor {
                 tabList.add("제한설정");
                 tabList.add("배수설정");
                 tabList.add("킬설정");
-                tabList.add("경험치설정");
                 tabList.add("초기화");
                 tabList.add("차감");
                 tabList.add("추가");
@@ -129,7 +123,7 @@ public class LevelCommand implements CommandExecutor, TabExecutor {
                 tabList.add("<NickName>");
             }
 
-            if (("제한설정".equals(args[0]) || "배수설정".equals(args[0]) || "킬설정".equals(args[0]) || "경험치설정".equals(args[0]) && player.isOp())) {
+            if (("제한설정".equals(args[0]) || "배수설정".equals(args[0]) || "킬설정".equals(args[0]) && player.isOp())) {
                 tabList.add("<Number>");
             }
             return StringUtil.copyPartialMatches(args[1], tabList, new ArrayList<>());

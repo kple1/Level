@@ -14,6 +14,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static io.leeple.level.Main.plugin;
@@ -99,35 +101,34 @@ public class SetKillEntity implements CommandExecutor, Listener {
         }
     }
 
-    /* 수정하기 클릭시 설정된 엔티티 표시 */
     @EventHandler
     public void setKillEntity(InventoryClickEvent event) {
         if (event.getView().getTitle().equals("동물킬 경험치 설정 (1 Page)") || event.getView().getTitle().equals("동물킬 경험치 설정 (2 Page)")) {
+            Inventory inventory = event.getInventory();
             int clickedSlot = event.getSlot();
-            ItemStack clickedItem = event.getInventory().getItem(clickedSlot);
 
+            ItemStack clickedItem = inventory.getItem(clickedSlot);
+
+            // 클릭한 슬롯에 아이템이 존재하고 로어를 변경하고자 하는 아이템인지 확인
             if (clickedItem != null) {
-                // 선택한 아이템의 로어를 가져오기
                 ItemMeta itemMeta = clickedItem.getItemMeta();
+
+                // 기존 로어 값 확인
                 List<String> lore = itemMeta.getLore();
 
-                if (lore != null) {
-                    String currentLore = lore.get(clickedSlot % 54);
-
-                    if (currentLore.equals(" > 설정된 엔티티입니다")) {
-                        // 로어를 공백으로 채우기
-                        lore.set(clickedSlot % 54, "");
-                    } else {
-                        // 로어를 " > 설정된 엔티티입니다"로 변경
-                        lore.set(clickedSlot % 54, " > 설정된 엔티티입니다");
-                    }
-
-                    itemMeta.setLore(lore);
-                    clickedItem.setItemMeta(itemMeta);
-
-                    // 인벤토리 업데이트
-                    event.getInventory().setItem(clickedSlot, clickedItem);
+                if (lore == null || lore.isEmpty() || lore.get(0).equals("")) {
+                    // 아이템에 로어가 없거나 공백인 경우
+                    itemMeta.setLore(Collections.singletonList(ChatColor.GREEN + "> 선택되었습니다!"));
+                } else if (lore.get(0).equals(ChatColor.GREEN + "")) {
+                    // 아이템에 공백이 있는 경우
+                    itemMeta.setLore(Collections.singletonList(ChatColor.GREEN + "> 선택되었습니다!"));
+                } else {
+                    // 아이템에 다른 로어 값이 있는 경우
+                    itemMeta.setLore(Collections.singletonList(ChatColor.GREEN + ""));
                 }
+
+                // 아이템 메타 업데이트
+                clickedItem.setItemMeta(itemMeta);
             }
         }
     }
