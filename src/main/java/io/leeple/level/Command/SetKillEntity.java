@@ -112,21 +112,15 @@ public class SetKillEntity implements CommandExecutor, Listener {
                 List<String> lore = itemMeta.getLore();
 
                 if (lore != null) {
-                    String currentLore = lore.get(clickedSlot % 54);
-
-                    if (currentLore.equals(" > 설정된 엔티티입니다")) {
-                        // 로어를 공백으로 채우기
-                        lore.set(clickedSlot % 54, "");
-                    } else {
-                        // 로어를 " > 설정된 엔티티입니다"로 변경
-                        lore.set(clickedSlot % 54, " > 설정된 엔티티입니다");
-                    }
+                    lore.set(clickedSlot, "> 설정된 아이템 입니다.");
 
                     itemMeta.setLore(lore);
                     clickedItem.setItemMeta(itemMeta);
 
                     // 인벤토리 업데이트
                     event.getInventory().setItem(clickedSlot, clickedItem);
+                } else if (lore.equals("> 설정된 아이템 입니다.")) {
+                    lore.set(clickedSlot, "");
                 }
             }
         }
