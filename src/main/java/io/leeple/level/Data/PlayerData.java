@@ -6,9 +6,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.io.File;
@@ -20,6 +23,21 @@ public class PlayerData implements Listener {
     public static YamlConfiguration config;
     public static File playerFile;
     public static YamlConfiguration eventConfig;
+    public static YamlConfiguration killConfig;
+
+    @EventHandler
+    public static YamlConfiguration killSaveConfig(EntityDeathEvent event) {
+        LivingEntity entity = event.getEntity();
+        Player player = entity.getKiller();
+
+        if (entity instanceof Pig && player != null) {
+            if (!playerFile.exists()) {
+                Main.getPlugin().createPlayerDefaults(player);
+            }
+            killConfig = YamlConfiguration.loadConfiguration(playerFile);
+        }
+        return killConfig;
+    }
 
     public static YamlConfiguration Config(String[] args, CommandSender sender) {
         if (sender instanceof Player player) {
@@ -56,9 +74,6 @@ public class PlayerData implements Listener {
     public static YamlConfiguration ClickConfig(InventoryClickEvent event) {
         if (event.getView().getTitle().equals("레벨보상")) {
             Player player = (Player) event.getWhoClicked();
-            UUID targetUUID = player.getUniqueId();
-
-            playerFile = new File(Main.getPlugin().getUuidFolder(), "plugins/Level/UUIDs/" + targetUUID.toString() + ".yml");
 
             if (!playerFile.exists()) {
                 Main.getPlugin().createPlayerDefaults(player);

@@ -8,9 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-import java.util.List;
-
 import static io.leeple.level.Data.PlayerData.config;
+import static io.leeple.level.Data.PlayerData.killConfig;
 
 public class GetLevelEXP implements Listener {
 
@@ -20,18 +19,16 @@ public class GetLevelEXP implements Listener {
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
-        LivingEntity entity = event.getEntity();
-        Player player = entity.getKiller();
-        List<String> existingAnimals = plugin.getConfig().getStringList("setKillEntity");
-        EntityType killEntityType = EntityType.valueOf(existingAnimals.toString().toUpperCase());
+        Player player = (Player) event.getEntity().getKiller();
 
-        if (entity.getType() != killEntityType) {
+        if (event.getEntityType() == EntityType.PIG && event.getEntity().getKiller() instanceof Player) {
             return;
         }
 
+
         int maxLevel = plugin.getConfig().getInt("maxLevel");
-        int level = config.getInt("Level");
-        String expString = config.getString("EXP");
+        int level = killConfig.getInt("Level");
+        String expString = killConfig.getString("EXP");
         String[] expSplit = expString.split("/");
         int currentExp = Integer.parseInt(expSplit[0]);
         int maxExp = Integer.parseInt(expSplit[1]);
@@ -58,8 +55,8 @@ public class GetLevelEXP implements Listener {
             currentExp = newExp; // 그 외에는 그대로 저장
         }
 
-        config.set("Level", level);
-        config.set("EXP", currentExp + "/" + maxExp);
+        killConfig.set("Level", level);
+        killConfig.set("EXP", currentExp + "/" + maxExp);
         Main.getPlugin().noMessageSaveConfig();
 
         plugin.updateActionBar(player, ColorUtils.chat("[ &b" + player.getName() + "&f님의 레벨정보: " + "&aLevel&f: " + level + " / " + "&aEXP&f: " + currentExp + "/" + maxExp + " ]"));
