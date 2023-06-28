@@ -1,5 +1,6 @@
 package io.leeple.level.Command;
 
+import io.leeple.level.Main;
 import io.leeple.level.Utils.ColorUtils;
 import io.leeple.level.Utils.ItemManager;
 import io.leeple.level.Data.PlayerData;
@@ -32,7 +33,7 @@ public class LevelReward implements CommandExecutor, Listener {
         if (sender instanceof Player player) {
             if (args.length > 0) {
 
-                YamlConfiguration config = PlayerData.Config(args, sender);
+                YamlConfiguration config = PlayerData.getPlayerConfig(player);
 
                 String Level = config.getString("Level");
                 String EXP = config.getString("EXP");
@@ -73,7 +74,8 @@ public class LevelReward implements CommandExecutor, Listener {
 
     @EventHandler
     public void saveClickReward(InventoryClickEvent event) {
-        YamlConfiguration config = PlayerData.ClickConfig(event);
+        Player player = (Player) event.getWhoClicked();
+        YamlConfiguration config = PlayerData.getPlayerConfig(player);
         int slot = event.getRawSlot();
 
         if (!event.getView().getTitle().equals("레벨보상")) {
@@ -82,7 +84,7 @@ public class LevelReward implements CommandExecutor, Listener {
 
         if (!config.contains(String.valueOf(slot))) {
             config.set(String.valueOf(slot), "X");
-            PlayerData.saveEventYamlConfiguration();
+            Main.getPlugin().saveYamlConfiguration();
         }
     }
 
@@ -93,7 +95,7 @@ public class LevelReward implements CommandExecutor, Listener {
         }
 
         Player player = (Player) event.getWhoClicked();
-        YamlConfiguration eventConfig = PlayerData.ClickConfig(event);
+        YamlConfiguration eventConfig = PlayerData.getPlayerConfig(player);
         int clickedSlot = event.getRawSlot();
         String saveReward = eventConfig.getString(String.valueOf(clickedSlot));
         int limitLevel = Integer.parseInt(plugin.getConfig().getString("reward." + clickedSlot + ".limitlevel"));
@@ -117,7 +119,7 @@ public class LevelReward implements CommandExecutor, Listener {
                 if (Objects.equals(saveReward, "X")) {
                     player.getInventory().addItem(reward);
                     eventConfig.set(String.valueOf(clickedSlot), "O");
-                    PlayerData.saveEventYamlConfiguration();
+                    Main.getPlugin().saveYamlConfiguration();
                     receivedReward = true; // 보상을 수령했음을 표시
                 }
             } else {

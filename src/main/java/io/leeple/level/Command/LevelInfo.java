@@ -16,7 +16,7 @@ public class LevelInfo implements CommandExecutor {
 
         if (sender instanceof Player player) {
             if (args.length > 0) {
-                YamlConfiguration config = PlayerData.Config(args, sender);
+                YamlConfiguration config = PlayerData.getPlayerConfig(player);
                 String getArgsPlayerName = args[0];
                 Player targetPlayer = Bukkit.getPlayerExact(getArgsPlayerName);
                 String playerName = targetPlayer.getName();

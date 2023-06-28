@@ -23,10 +23,10 @@ public class LevelReset implements CommandExecutor {
             String playerName = player.getName();
 
             if (player.isOp()) {
-                YamlConfiguration config = PlayerData.Config(args, sender);
+                YamlConfiguration config = PlayerData.getPlayerConfig(player);
                 config.set("Level", "1");
                 config.set("EXP", "0/10");
-                Main.getPlugin().saveYamlConfiguration(player);
+                Main.getPlugin().saveYamlConfiguration();
 
                 sender.sendMessage(ChatColor.GREEN + playerName + "님의 레벨이 초기화되었습니다.");
                 String Level = config.getString("Level");

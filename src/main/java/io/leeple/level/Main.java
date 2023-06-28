@@ -21,7 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static io.leeple.level.Data.PlayerData.*;
+import static io.leeple.level.Data.PlayerData.config;
+import static io.leeple.level.Data.PlayerData.playerFile;
 
 public final class Main extends JavaPlugin implements CommandExecutor {
 
@@ -69,12 +70,12 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     }
 
     //플레이어의 uuid명으로 생성된 config에 레벨정보를 기본적으로 추가
-    public void createPlayerDefaults(Player player) {
+    public void createPlayerDefaults() {
         YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playerFile);
         playerConfig.addDefault("Level", "1");
         playerConfig.addDefault("EXP", "0/10");
         playerConfig.options().copyDefaults(true);
-        saveYamlConfiguration(player);
+        saveYamlConfiguration();
     }
 
     public void updateActionBar(Player player, String message) {
@@ -96,10 +97,9 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     }
 
     //저장
-    public void saveYamlConfiguration(Player player) {
+    public void saveYamlConfiguration() {
         try {
             config.save(playerFile);
-            player.sendMessage(("정보가 저장 되었습니다"));
         } catch (IOException e) {
             e.printStackTrace();
         }

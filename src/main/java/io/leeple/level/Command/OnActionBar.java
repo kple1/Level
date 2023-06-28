@@ -16,7 +16,7 @@ public class OnActionBar implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
             if (args.length > 0) {
-                YamlConfiguration config = PlayerData.Config(args, sender);
+                YamlConfiguration config = PlayerData.getPlayerConfig(player);
                 String Level = config.getString("Level");
                 String EXP = config.getString("EXP");
                 String message = (ColorUtils.chat("[ &b" + player.getName() + "&f님의 레벨정보: " + "&aLevel&f: " + Level + " / " + "&aEXP&f: " + EXP + " ]"));

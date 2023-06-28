@@ -19,7 +19,7 @@ public class LevelDiscount implements CommandExecutor {
         if (sender instanceof Player player) {
             if (player.isOp()) {
 
-                YamlConfiguration config = PlayerData.Config(args, sender);
+                YamlConfiguration config = PlayerData.getPlayerConfig(player);
 
                 String expString = config.getString("EXP"); // "현재 경험치/최대 경험치" 형식의 문자열을 가져옴
                 int expToAdd = Integer.parseInt(args[2]); // args[0]에 입력된 값을 int형으로 파싱하여 추가할 경험치로 사용
@@ -32,7 +32,7 @@ public class LevelDiscount implements CommandExecutor {
                 }
                 String newExpString = newExp + "/" + maxExp; // 새로운 "현재 경험치/최대 경험치" 형식의 문자열을 생성
                 config.set("EXP", newExpString); // 새로운 문자열로 "EXP" 키의 값을 업데이트
-                Main.getPlugin().saveYamlConfiguration(player); // 업데이트된 설정 파일을 저장
+                Main.getPlugin().saveYamlConfiguration(); // 업데이트된 설정 파일을 저장
 
                 String Level = config.getString("Level");
                 String EXP = config.getString("EXP");
