@@ -94,6 +94,7 @@ public class SetKillEntity implements CommandExecutor, Listener {
                     }
                     nextPage.setItem(i, item);
                 }
+                //null 수정
                 player.openInventory(inv);
             }
         }
@@ -119,7 +120,7 @@ public class SetKillEntity implements CommandExecutor, Listener {
 
                     // 인벤토리 업데이트
                     event.getInventory().setItem(clickedSlot, clickedItem);
-                } else if (lore.equals("> 설정된 아이템 입니다.")) {
+                } else {
                     lore.set(clickedSlot, "");
                 }
             }
